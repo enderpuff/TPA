@@ -1,6 +1,7 @@
 programa
 {
 	inclua biblioteca Texto --> txt
+	inclua biblioteca Util --> utl
 	
 	/**
 	 * ATIVIDADES - VETORES E MATRIZES
@@ -50,7 +51,17 @@ programa
 		"novecentos"	
 	}
 
-	const cadeia estados [28][2] = {
+	const cadeia diasDaSemana[7][2] = {
+		{"0", "Domingo"},
+		{"1", "Segunda-Feira"},
+		{"2", "Terça-Feira"},
+		{"3", "Quarta-Feira"},
+		{"4", "Quinta-Feira"},
+		{"5", "Sexta-Feira"},
+		{"6", "Sábado"}
+	}
+
+	const cadeia estados[28][2] = {
 		{"AC", "Acre"},
 		{"AL", "Alagoas"},
 		{"AP", "Amapá"},
@@ -80,11 +91,54 @@ programa
 		{"SE", "Sergipe"},
 		{"TO", "Tocantins"}
 	}
+
+	const cadeia menu[] = {
+		"Dias da Semana",
+		"Estados Brasileiros",
+		"Sair"
+	}
 		
 	funcao inicio() {	
-		cadeia input
-		leia(input)
-		buscador_estado(input)
+		inteiro input
+		faca {
+			escreva("Olá, qual programa deseja utilizar?\n")
+			menuPrint(menu, falso)
+			leia(input)
+			escolha (input) {
+				caso 1:
+					cadeia diasemana
+					escreva("Nesse programa, você poderá colocar um dia da semana e ele retornará o número, e vice-versa.\nEscreva o dia ou número: ")
+					utl.aguarde(2500)
+					limpa()
+					pare
+				caso 2:
+					cadeia estadao
+					escreva("Nesse programa, você irá escrever o nome de um estado, e a sigla será retornada, e vice-versa.\nEscreva o estado ou sigla: ")
+					leia(estadao)
+					buscador_estado(estadao)
+					utl.aguarde(2500)
+					limpa()
+					pare
+				caso 3:
+					pare
+				caso contrario:
+					escreva("A opção que selecionou é inválida!")
+					utl.aguarde(2500)
+					limpa()
+					pare
+			}
+		} enquanto(input != 3)
+	}
+
+	/**
+	 * Função para escrever o menu.
+	 * @param {cadeia[]} opcoes - As opções que serão escritas no console
+	 * @param {logico} subMenu - Se o menu escrito é um subMenu ou não
+	 */
+	funcao menuPrint(cadeia opcoes[], logico subMenu){
+		para(inteiro i=0;i<utl.numero_elementos(opcoes);i++) {
+			escreva((i+1) + " - " + opcoes[i] + "\n")
+		}
 	}
 
 	/**
@@ -94,18 +148,18 @@ programa
 	funcao buscador_estado(cadeia sn) {
 		logico valido = falso
 		para (inteiro i=1;i<28;i++) {
-			se (sn == estados[i][0]) {
-				escreva("O nome do estado correspondente a sigla é " + estados[i][1])
+			se (txt.caixa_alta(sn) == txt.caixa_alta(estados[i][0])) {
+				escreva("\nO nome do estado correspondente a sigla é " + estados[i][1])
 				valido = verdadeiro
 				pare
 			} senao se (txt.caixa_alta(sn) == txt.caixa_alta(estados[i][1])) {
-				escreva("A sigla correspondente ao estado é " + estados[i][0])
+				escreva("\nA sigla correspondente ao estado é " + estados[i][0])
 				valido = verdadeiro
 				pare
 			}
 		}
 		se (nao valido) {
-			escreva("O estado não existe ou não foi registrado.")
+			escreva("\nO estado não existe ou não foi registrado.")
 		}
 	}
 
@@ -125,7 +179,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1890; 
+ * @POSICAO-CURSOR = 1693; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
