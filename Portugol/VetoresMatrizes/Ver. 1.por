@@ -52,13 +52,13 @@ programa
 	}
 
 	const cadeia diasDaSemana[7][2] = {
-		{"0", "Domingo"},
-		{"1", "Segunda-Feira"},
-		{"2", "Terça-Feira"},
-		{"3", "Quarta-Feira"},
-		{"4", "Quinta-Feira"},
-		{"5", "Sexta-Feira"},
-		{"6", "Sábado"}
+		{"1", "Domingo"},
+		{"2", "Segunda-Feira"},
+		{"3", "Terça-Feira"},
+		{"4", "Quarta-Feira"},
+		{"5", "Quinta-Feira"},
+		{"6", "Sexta-Feira"},
+		{"7", "Sábado"}
 	}
 
 	const cadeia estados[28][2] = {
@@ -109,6 +109,8 @@ programa
 				caso 1:
 					cadeia diasemana
 					escreva("Nesse programa, você poderá colocar um dia da semana e ele retornará o número, e vice-versa.\nEscreva o dia ou número: ")
+					leia(diasemana)
+					dias_semana(diasemana)
 					utl.aguarde(2500)
 					limpa()
 					pare
@@ -147,6 +149,27 @@ programa
 	funcao menuPrint(cadeia opcoes[], logico subMenu){
 		para(inteiro i=0;i<utl.numero_elementos(opcoes);i++) {
 			escreva((i+1) + " - " + opcoes[i] + "\n")
+		}
+	}
+
+	/**
+	 * 
+	 */
+	funcao dias_semana(cadeia dn) {
+		logico valido = falso
+		para (inteiro i=0;i<=7;i++) {
+			se (txt.caixa_alta(dn) == txt.caixa_alta(diasDaSemana[i][0])) {
+				escreva("\nO nome do dia da semana correspondente ao número é " + diasDaSemana[i][1])
+				valido = verdadeiro
+				pare
+			} senao se (txt.caixa_alta(dn) == txt.caixa_alta(diasDaSemana[i][1])) {
+				escreva("\nO número correspondente ao dia da semana é " + diasDaSemana[i][0])
+				valido = verdadeiro
+				pare
+			}
+		}
+		se (nao valido) {
+			escreva("\nO número ou dia da semana escrito é inválido.")
 		}
 	}
 
@@ -192,7 +215,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3945; 
+ * @POSICAO-CURSOR = 3007; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
