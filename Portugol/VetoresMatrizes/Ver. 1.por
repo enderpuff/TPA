@@ -95,6 +95,7 @@ programa
 	const cadeia menu[] = {
 		"Dias da Semana",
 		"Estados Brasileiros",
+		"Extenso",
 		"Sair"
 	}
 		
@@ -120,6 +121,14 @@ programa
 					limpa()
 					pare
 				caso 3:
+					inteiro ex
+					escreva("a")
+					leia(ex)
+					escreva(extenso(ex))
+					utl.aguarde(2500)
+					limpa()
+					pare
+				caso 4:
 					pare
 				caso contrario:
 					escreva("A opção que selecionou é inválida!")
@@ -127,7 +136,7 @@ programa
 					limpa()
 					pare
 			}
-		} enquanto(input != 3)
+		} enquanto(input != 4)
 	}
 
 	/**
@@ -168,18 +177,22 @@ programa
 			retorne unidades[num]
 		} senao se (num == 10) {
 			retorne "Dez"
-		} senao se (num > 10 e num < 20) {
+		} senao se (num > 10 e num <= 20) {
 			retorne dezenas[num-11]	
+		} //senao se (num >= 20 e num < 100) {
+			
+		/*}*/ senao se (num == 100) {
+			retorne "Cem"
 		}
 		retorne ""
 	}
-}
+} 
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1693; 
+ * @POSICAO-CURSOR = 3945; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
