@@ -2,25 +2,24 @@ programa
 {
 	inclua biblioteca Texto --> txt
 	inclua biblioteca Util --> utl
+	inclua biblioteca Tipos --> tp
 	
 	/**
 	 * ATIVIDADES - VETORES E MATRIZES
 	 */
 
- 	const cadeia unidades[] = {
+ 	cadeia extenso[] = {
  		"Zero",
-		"um",
-		"dois",
-		"três",
-		"quatro",
-		"cinco",
-		"seis",
-		"sete",
-		"oito",
-		"nove"
-	}
-
-	const cadeia dezenas[] = {
+		"Um",
+		"Dois",
+		"Três",
+		"Quatro",
+		"Cinco",
+		"Seis",
+		"Sete",
+		"Oito",
+		"Nove",
+		"Dez",
 		"Onze",
 		"Doze",
 		"Treze",
@@ -29,26 +28,7 @@ programa
 		"Dezesseis",
 		"Dezessete",
 		"Dezoito",
-		"Dezenove",
-		"vinte",
-		"trinta",
-		"quarenta",
-		"cinquenta",
-		"sessenta",
-		"oitenta",
-		"noventa"
-	}
-
-	const cadeia centenas[] = {
-		"cento",
-		"duzentos",
-		"trezentos",
-		"quatrocentos",
-		"quinhentos",
-		"seiscentos",
-		"setecentos",
-		"oitocentos",
-		"novecentos"	
+		"Dezenove"
 	}
 
 	const cadeia diasDaSemana[7][2] = {
@@ -59,6 +39,21 @@ programa
 		{"5", "Quinta-Feira"},
 		{"6", "Sexta-Feira"},
 		{"7", "Sábado"}
+	}
+
+	const cadeia meses[12][2] = {
+		{"1", "Janeiro"},
+		{"2", "Fevereiro"},
+		{"3", "Março"},
+		{"4", "Abril"},
+		{"5", "Maio"},
+		{"6", "Junho"},
+		{"7", "Julho"},
+		{"8", "Agosto"},
+		{"9", "Outubro"},
+		{"10", "Setembro"},
+		{"11", "Novembro"},
+		{"12", "Dezembro"}	
 	}
 
 	const cadeia estados[28][2] = {
@@ -93,13 +88,23 @@ programa
 	}
 
 	const cadeia menu[] = {
-		"Dias da Semana",
+		"Dias da Semana/Mês",
 		"Estados Brasileiros",
 		"Extenso",
+		"Megasena",
 		"Sair"
 	}
 		
-	funcao inicio() {	
+	funcao inicio() {
+		extenso[20] = "Vinte"
+		extenso[30] = "Trinta"
+		extenso[40] = "Quarenta"
+		extenso[50] = "Cinquenta"
+		extenso[60] = "Sessenta"
+		extenso[70] = "Setenta"
+		extenso[80] = "Oitenta"
+		extenso[90] = "Noventa"
+		
 		inteiro input
 		faca {
 			escreva("Olá, qual programa deseja utilizar?\n")
@@ -107,10 +112,7 @@ programa
 			leia(input)
 			escolha (input) {
 				caso 1:
-					cadeia diasemana
-					escreva("Nesse programa, você poderá colocar um dia da semana e ele retornará o número, e vice-versa.\nEscreva o dia ou número: ")
-					leia(diasemana)
-					dias_semana(diasemana)
+					dias_semana()
 					utl.aguarde(2500)
 					limpa()
 					pare
@@ -130,7 +132,7 @@ programa
 					utl.aguarde(2500)
 					limpa()
 					pare
-				caso 4:
+				caso 5:
 					pare
 				caso contrario:
 					escreva("A opção que selecionou é inválida!")
@@ -138,7 +140,7 @@ programa
 					limpa()
 					pare
 			}
-		} enquanto(input != 4)
+		} enquanto(input != 5)
 	}
 
 	/**
@@ -155,21 +157,51 @@ programa
 	/**
 	 * 
 	 */
-	funcao dias_semana(cadeia dn) {
+	funcao dias_semana() {
+		cadeia dnm
+		escreva("\nNesse programa, você poderá colocar um dia da semana ou mês e ele retornará o número, e vice-versa.")
+		
+		caracter semanames = 'S'
 		logico valido = falso
-		para (inteiro i=0;i<=7;i++) {
-			se (txt.caixa_alta(dn) == txt.caixa_alta(diasDaSemana[i][0])) {
-				escreva("\nO nome do dia da semana correspondente ao número é " + diasDaSemana[i][1])
-				valido = verdadeiro
-				pare
-			} senao se (txt.caixa_alta(dn) == txt.caixa_alta(diasDaSemana[i][1])) {
-				escreva("\nO número correspondente ao dia da semana é " + diasDaSemana[i][0])
-				valido = verdadeiro
-				pare
+		escreva("\nDeseja consultar [S]emana ou [M]ês? [S/M] ")
+		leia(semanames)
+		
+		se (tp.cadeia_para_caracter(txt.caixa_alta(tp.caracter_para_cadeia(semanames))) == 'S') {
+			escreva("\nEscreva o dia ou número: ")
+			leia(dnm)
+			
+			para (inteiro i=0;i<=7;i++) {
+				se (txt.caixa_alta(dnm) == txt.caixa_alta(diasDaSemana[i][0])) {
+					escreva("\nO nome do dia da semana correspondente ao número é " + diasDaSemana[i][1])
+					valido = verdadeiro
+					pare
+				} senao se (txt.caixa_alta(dnm) == txt.caixa_alta(diasDaSemana[i][1])) {
+					escreva("\nO número correspondente ao dia da semana é " + diasDaSemana[i][0])
+					valido = verdadeiro
+					pare
+				}
 			}
-		}
-		se (nao valido) {
-			escreva("\nO número ou dia da semana escrito é inválido.")
+			se (nao valido) {
+				escreva("\nO número ou dia da semana escrito é inválido.")
+			}
+		} senao se (tp.cadeia_para_caracter(txt.caixa_alta(tp.caracter_para_cadeia(semanames))) == 'M') {
+			escreva("\nEscreva o mês ou número: ")
+			leia(dnm)
+			
+			para (inteiro i=0;i<=12;i++) {
+				se (txt.caixa_alta(dnm) == txt.caixa_alta(meses[i][0])) {
+					escreva("\nO nome do mês correspondente ao número é " + meses[i][1])
+					valido = verdadeiro
+					pare
+				} senao se (txt.caixa_alta(dnm) == txt.caixa_alta(meses[i][1])) {
+					escreva("\nO número correspondente ao mês é " + meses[i][0])
+					valido = verdadeiro
+					pare
+				}
+			}
+			se (nao valido) {
+				escreva("\nO número ou mês escrito é inválido.")
+			}
 		}
 	}
 
@@ -195,27 +227,16 @@ programa
 		}
 	}
 
-	funcao cadeia extenso(inteiro num) {
-		se (num < 10) {
-			retorne unidades[num]
-		} senao se (num == 10) {
-			retorne "Dez"
-		} senao se (num > 10 e num <= 20) {
-			retorne dezenas[num-11]	
-		} //senao se (num >= 20 e num < 100) {
-			
-		/*}*/ senao se (num == 100) {
-			retorne "Cem"
-		}
-		retorne ""
-	}
+	/*funcao cadeia paraExtenso(inteiro num) {
+		
+	}*/
 } 
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3007; 
+ * @POSICAO-CURSOR = 5461; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
