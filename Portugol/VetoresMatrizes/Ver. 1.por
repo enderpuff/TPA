@@ -91,56 +91,62 @@ programa
 		"Dias da Semana/Mês",
 		"Estados Brasileiros",
 		"Extenso",
-		"Megasena",
-		"Sair"
+		"Megasena"
 	}
 		
 	funcao inicio() {
-		extenso[20] = "Vinte"
+		/*extenso[20] = "Vinte"
 		extenso[30] = "Trinta"
 		extenso[40] = "Quarenta"
 		extenso[50] = "Cinquenta"
 		extenso[60] = "Sessenta"
 		extenso[70] = "Setenta"
 		extenso[80] = "Oitenta"
-		extenso[90] = "Noventa"
+		extenso[90] = "Noventa"*/
 		
 		inteiro input
+		cadeia continue
 		faca {
-			escreva("Olá, qual programa deseja utilizar?\n")
+			escreva("\nOlá, qual programa deseja utilizar?\n")
 			menuPrint(menu, falso)
 			leia(input)
 			escolha (input) {
 				caso 1:
+					limpa()
 					dias_semana()
-					utl.aguarde(2500)
+					escreva("\nDeseja continuar? (S/n) ")
+					leia(continue)
 					limpa()
 					pare
 				caso 2:
+					limpa()
 					cadeia estadao
 					escreva("Nesse programa, você irá escrever o nome de um estado, e a sigla será retornada, e vice-versa.\nEscreva o estado ou sigla: ")
 					leia(estadao)
 					buscador_estado(estadao)
-					utl.aguarde(2500)
+					escreva("\nDeseja continuar? (S/n) ")
+					leia(continue)
 					limpa()
 					pare
 				caso 3:
+					limpa()
 					inteiro ex
 					escreva("a")
 					leia(ex)
-					escreva(extenso(ex))
-					utl.aguarde(2500)
+					//escreva(paraExtenso(ex))
+					escreva("\nDeseja continuar? (S/n) ")
+					leia(continue)
 					limpa()
 					pare
-				caso 5:
-					pare
 				caso contrario:
+					limpa()
 					escreva("A opção que selecionou é inválida!")
-					utl.aguarde(2500)
+					escreva("\nDeseja continuar? (S/n) ")
+					leia(continue)
 					limpa()
 					pare
 			}
-		} enquanto(input != 5)
+		} enquanto(txt.caixa_alta(continue) == "S" ou txt.caixa_alta(continue) == "SIM")
 	}
 
 	/**
@@ -236,7 +242,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5461; 
+ * @POSICAO-CURSOR = 2190; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
